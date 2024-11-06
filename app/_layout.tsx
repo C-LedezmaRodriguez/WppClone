@@ -1,37 +1,50 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
+// import React from 'react';
+// import { View } from 'react-native';
+// import { Stack, Navigator } from 'expo-router';
+// import Slot = Navigator.Slot
+// // import ChatsScreen from '../screens/ChatsScreen';
+
+// export default function RouteLayout() {
+//   return (
+//     <View style ={{width: '100%', height: '100%', backgroundColor: 'green'}}>
+//       <Stack initialRouteName="chats">
+//         <Stack.Screen name="chats"/>
+//         <Stack.Screen name="calls" />
+//       </Stack>
+//     {/* <Slot>
+
+//     </Slot> */}
+//     </View>
+//   );
+// }
+
+
+// import { View } from 'react-native';
+// import { Stack } from 'expo-router'; // Solo importa Stack si lo necesitas
+
+
+// export default function RouteLayout() {
+//   return (
+//     <View style={{ width: '100%', height: '100%', backgroundColor: 'green' }}>
+//       <Stack initialRouteName="tabs">
+//         <Stack.Screen name="tabs" options={{ headerShown: false }} />
+//       </Stack>
+//     </View>
+//   );
+// }
+
+
+import { View } from 'react-native';
 import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
-
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
+export default function RouteLayout() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
+    <View style={{ flex: 1, backgroundColor: 'green' }}>
+      <Stack initialRouteName="tabs">
+        <Stack.Screen name="tabs" options={{ headerShown: false }} />
+        <Stack.Screen name="chats/index" options={{ title: 'Chats' }} />
+        <Stack.Screen name="chats/[chatId]" options={{ title: 'Chat' }} />
       </Stack>
-    </ThemeProvider>
+    </View>
   );
 }
