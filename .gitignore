@@ -11,7 +11,7 @@ npm-debug.*
 web-build/
 ios/
 android/
-workspaces.xml
+workspace.xml
 
 # macOS
 .DS_Store
