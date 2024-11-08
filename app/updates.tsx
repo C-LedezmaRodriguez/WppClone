@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 
-const StatusScreen: React.FC = () => {
+const UpdatesScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StatusScreen;
+export default UpdatesScreen;

@@ -1,10 +1,12 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import CallsScreen from './calls'; 
-import StatusScreen from './status'; 
-import ChatsStack from './chats/chatStack'; 
+import UpdatesScreen from './updates'; 
+import CommunitiesScreen from './communities';
 import { StyleSheet } from 'react-native';
 import ChatsScreen from './chats/index';
+import SettingsScreen from './settings';
+import Header from '@/components/Header';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,11 +14,13 @@ const TabsNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: false,
+        header:() => <Header/>,
+        // headerShown: false,
         tabBarStyle: styles.tabBar, 
         tabBarLabelStyle: styles.tabBarLabel, 
         tabBarActiveTintColor: 'white',
         tabBarInactiveTintColor: 'lightgray', 
+        
       }}
     >
       <Tab.Screen 
@@ -34,10 +38,24 @@ const TabsNavigator = () => {
         }}
       />
       <Tab.Screen 
-        name="status" 
-        component={StatusScreen} 
+        name="updates" 
+        component={UpdatesScreen} 
         options={{
           tabBarIcon: ({ color }) => <Ionicons name="information-circle" size={20} color={color} />,
+        }}
+      />
+      <Tab.Screen 
+        name="communities" 
+        component={CommunitiesScreen}  
+        options={{
+          tabBarIcon: ({ color }) => <MaterialIcons name="group" size={20} color={color} />,
+        }}
+      />
+      <Tab.Screen 
+        name="settings" 
+        component={SettingsScreen}  
+        options={{
+          tabBarIcon: ({ color }) => <Ionicons name="settings" size={20} color={color} />,
         }}
       />
     </Tab.Navigator>

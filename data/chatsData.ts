@@ -1,15 +1,16 @@
 export const chatsData = {
   SObya8AzAYBgI98kdAcc: {
     id: 'SObya8AzAYBgI98kdAcc',
-    name: 'Juanito Perez',
+    name: 'Juanito',
+    lastName: 'Perez',
     chats: {
       k3sI7YuDFCaGzDSs6UUf: {
         id: 'k3sI7YuDFCaGzDSs6UUf',
-        name: 'Menganito Suarez',
-        lastMessage: 'Como es',
+        name: 'Menganito',
+        lastName: 'Suarez',
         type: 'individual',
         messages: [
-          { message: 'Como es', createdAt: 1729987200000 },
+          { message: 'Como estas?', createdAt: 1729987200000 },
           // otros mensajes...
         ],
       },

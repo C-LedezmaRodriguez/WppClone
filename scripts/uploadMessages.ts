@@ -15,7 +15,7 @@ const uploadMessages = async () => {
       });
     });
 
-    await batch.commit(); // Ejecuta las operaciones en batch
+    await batch.commit(); 
     console.log('Mensajes subidos exitosamente');
   } catch (error) {
     console.error('Error al subir los mensajes: ', error);
