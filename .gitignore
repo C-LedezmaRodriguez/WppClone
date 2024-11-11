@@ -12,6 +12,12 @@ web-build/
 ios/
 android/
 workspace.xml
+firebase-services.js
+google-services.json
+GoogleService-Info.plist
+/.yarn/*
+.idea/*
+
 
 # macOS
 .DS_Store
