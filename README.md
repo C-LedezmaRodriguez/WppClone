@@ -4,6 +4,8 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 ## Get started
 
+0. Ejecutar el archivo createFirebaseFiles.js con el comando `node createFirebaseFiles.js` para crear los archivos de configuración de firebase Y configurar los keys dentro estos archivos.
+
 1. Install dependencies
 
    ```bash
