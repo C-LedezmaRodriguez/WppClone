@@ -11,7 +11,6 @@ export const chatsData = {
         type: 'individual',
         messages: [
           { message: 'Como estas?', createdAt: 1729987200000 },
-          // otros mensajes...
         ],
       },
     },
