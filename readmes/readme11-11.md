@@ -4,13 +4,13 @@ Para que la aplicación se conecte a Firebase, son necearias algunas configuraci
 
 ### Archivos de Configuración
 
-Asegúrate de incluir los siguientes archivos en las ubicaciones indicadas dentro de tu proyecto:
+Se debe incluir los siguientes archivos el proyecto para la configuración con firebase:
 
-- **`firebase-service.json`** Este archivo contiene credenciales y configuraciones para que la aplicación se conecte a Firebase. 
-- **`google-services.json`** Este archivo es necesario para la integracion con Firebase en Android.
-- **`GoogleService-Info.plist`** Este archivo es necesario para la integracion con Firebase en iOs.
+- **firebase-service.json** Este archivo contiene credenciales y configuraciones para que la aplicación se conecte a Firebase. 
+- **google-services.json** Este archivo es necesario para la integracion con Firebase en Android.
+- **GoogleService-Info.plist** Este archivo es necesario para la integracion con Firebase en iOs.
 
-> **Importante**: Como estos archivos contienen los credenciales de Firebase y deben mantenerse seguros. No se debe compartir ni subirse a github para que no se encuentre público.
+**Importante**: Como estos archivos contienen los credenciales de Firebase y deben mantenerse seguros. No se debe compartir ni subirse a github para que no se encuentre público.
 
 ### Agregar archivos al `.gitignore`
 
