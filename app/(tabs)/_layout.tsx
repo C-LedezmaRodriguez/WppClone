@@ -5,7 +5,6 @@ import UpdatesScreen from './updates';
 import CommunitiesScreen from './communities';
 import ChatsScreen from './chats';
 import SettingsScreen from './settings'; 
-import Header from '@/components/Header';
 import { StyleSheet } from 'react-native';
 
 const Tab = createBottomTabNavigator();
@@ -14,11 +13,11 @@ const Layout = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        header: () => <Header />,
         tabBarStyle: styles.tabBar,
         tabBarLabelStyle: styles.tabBarLabel,
         tabBarActiveTintColor: 'white',
         tabBarInactiveTintColor: 'lightgray',
+        headerShown: false,
       }}
     >
       <Tab.Screen

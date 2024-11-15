@@ -1,7 +1,7 @@
 import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 
-const Header: React.FC = () => {
+const HeaderChats: React.FC = () => {
   return (
     <SafeAreaView>
       <View style={styles.principalContainer}>
@@ -67,4 +67,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Header;
+export default HeaderChats;

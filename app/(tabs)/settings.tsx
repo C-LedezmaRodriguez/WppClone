@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, TextInput,Image} from 'react-native';
 import { Ionicons, MaterialIcons, Entypo, FontAwesome6 } from '@expo/vector-icons';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 type IconLibrary = 'Ionicons' | 'MaterialIcons' | 'Entypo' | 'FontAwesome6';
 
@@ -60,7 +61,8 @@ const SettingsScreen: React.FC = () => {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <SafeAreaView>
+      <ScrollView style={styles.container}>
       <TextInput
         style={styles.searchInput}
         placeholder="Search"
@@ -108,6 +110,7 @@ const SettingsScreen: React.FC = () => {
         ))}
       </View>
     </ScrollView>
+    </SafeAreaView>
   );
 };
 

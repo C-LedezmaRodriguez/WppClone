@@ -1,8 +1,10 @@
-import { View, Text, StyleSheet,SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet,SafeAreaView} from 'react-native';
+import HeaderCalls from '@/components/HeaderCalls';
 
 const CallsScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
+      <HeaderCalls />
       <View style={styles.content}>
         <Text>llamaditas</Text>
       </View>
