@@ -200,8 +200,10 @@ const styles = StyleSheet.create({
     backgroundColor:'#f5f5f5',
   },
   activeFilterButton: {
-    padding: 8,
-    borderRadius: 5,
+    // paddingLeft:10,
+    // paddingRight:10,
+    padding:10,
+    borderRadius: 20,
     backgroundColor: '#8fbc8f',
   },
   filterText: {

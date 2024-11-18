@@ -61,60 +61,64 @@ const SettingsScreen: React.FC = () => {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.safeArea}>
       <ScrollView style={styles.container}>
-      <TextInput
-        style={styles.searchInput}
-        placeholder="Search"
-        value={searchText}
-        onChangeText={setSearchText}
-      />
-      <View style={styles.userSection}>
-        <Image source={{ uri: userOptions.profileImage }} style={styles.profileImage} />
-        <View>
-          <Text style={styles.userName}>{userOptions.name}</Text>
-          <Text style={styles.userStatus}>{userOptions.status}</Text>
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search"
+          value={searchText}
+          onChangeText={setSearchText}
+        />
+        <View style={styles.userSection}>
+          <Image source={{ uri: userOptions.profileImage }} style={styles.profileImage} />
+          <View>
+            <Text style={styles.userName}>{userOptions.name}</Text>
+            <Text style={styles.userStatus}>{userOptions.status}</Text>
+          </View>
         </View>
-      </View>
-      <View style={styles.section}>
-        {firstOptions.map((option) => (
-          <TouchableOpacity key={option.id} style={styles.option}>
-            {renderIcon(option)}
-            <Text style={styles.label}>{option.label}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-      <View style={styles.section}>
-        {secondOptions.map((option) => (
-          <TouchableOpacity key={option.id} style={styles.option}>
-            {renderIcon(option)}
-            <Text style={styles.label}>{option.label}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-      <View style={styles.section}>
-        {thirdOptions.map((option) => (
-          <TouchableOpacity key={option.id} style={styles.option}>
-            {renderIcon(option)}
-            <Text style={styles.label}>{option.label}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-      <View style={styles.section}>
-      <Text style={styles.sectionTitle}>Also from Meta</Text>
-        {otherOptions.map((option) => (
-          <TouchableOpacity key={option.id} style={styles.option}>
-            {renderIcon(option)}
-            <Text style={styles.label}>{option.label}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-    </ScrollView>
+        <View style={styles.section}>
+          {firstOptions.map((option) => (
+            <TouchableOpacity key={option.id} style={styles.option}>
+              {renderIcon(option)}
+              <Text style={styles.label}>{option.label}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+        <View style={styles.section}>
+          {secondOptions.map((option) => (
+            <TouchableOpacity key={option.id} style={styles.option}>
+              {renderIcon(option)}
+              <Text style={styles.label}>{option.label}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+        <View style={styles.section}>
+          {thirdOptions.map((option) => (
+            <TouchableOpacity key={option.id} style={styles.option}>
+              {renderIcon(option)}
+              <Text style={styles.label}>{option.label}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+        <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Also from Meta</Text>
+          {otherOptions.map((option) => (
+            <TouchableOpacity key={option.id} style={styles.option}>
+              {renderIcon(option)}
+              <Text style={styles.label}>{option.label}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
