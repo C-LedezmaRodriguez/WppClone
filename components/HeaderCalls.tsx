@@ -39,7 +39,7 @@ const HeaderCalls: React.FC = () => {
         </View>
         <View style={styles.thirdContainer}>
         <TouchableOpacity style={styles.iconContainer}>
-            <AntDesign name="plus" size={24} color="black" backgroundColor="#eeecea"/>
+            <AntDesign name="plus" size={24} color="black" backgroundColor="transparent" />
           </TouchableOpacity>
         </View>
       </View>
@@ -51,31 +51,33 @@ const styles = StyleSheet.create({
   principalContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between', 
+    justifyContent: 'space-between',
     paddingVertical: 10,
     backgroundColor: '#f5f5f5',
   },
   firstContainer: {
     flexDirection: 'row',
-    justifyContent: 'flex-start', 
-    flex: 1, 
+    justifyContent: 'flex-start',
+    flex: 1,
   },
   secondContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center', 
-    flex: 1, 
+    justifyContent: 'center',
+    flex: 1,
     paddingRight: 16
   },
   thirdContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-end', 
-    flex: 1, 
+    justifyContent: 'flex-end',
+    flex: 1,
     paddingRight: 16
   },
   iconContainer: {
-    paddingHorizontal: 8,
+    padding: 4,
+    backgroundColor: '#eeecea',
+    borderRadius: 50,
   },
   buttonBox: {
     flexDirection: 'row',
