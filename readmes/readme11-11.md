@@ -47,7 +47,6 @@ agregamos ciertos plugins importantes para nuestra aplicación de expo:
 **@react-native-firebase/app** Ayuda a integrar Firebase xon nuestra aplicación para usar los servicios que ofrece.
 **expo-build-properties** Nos permite personalizar configuraciones especificas para iOS y Android. Asi Ajustar esas configuraciones que no están predeterminadamente en expo.
 
-
 ### Instalacion de dependecias
 
 Después de que se  realizó el cambio de las dependencias en el archivo package.json y subió estos cambios al repositorio, es neceascrio ejecutar npm install para actualizar las mismas en el respositorio local.
