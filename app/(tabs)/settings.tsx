@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, TextInput,Image} from 'react-native';
 import { Ionicons, MaterialIcons, Entypo, FontAwesome6 } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useThemeColor } from '@/hooks/useThemeColor';
 
 type IconLibrary = 'Ionicons' | 'MaterialIcons' | 'Entypo' | 'FontAwesome6';
 
@@ -45,6 +46,13 @@ const otherOptions: SettingsOption[] = [
 
 const SettingsScreen: React.FC = () => {
   const [searchText, setSearchText] = useState('');
+
+  const backgroundColor = useThemeColor({}, 'backgroundCalls');
+  const backgroundColorSection = useThemeColor({}, 'background')
+  const textColor = useThemeColor({}, 'text');
+  const textStatus = useThemeColor({}, 'textBackgroundTabs');
+  const buttonBackgroundColor = useThemeColor({}, 'buttonBackgroundTabs');
+  const icon = useThemeColor({}, 'icon');
   const renderIcon = (option: SettingsOption) => {
     switch (option.iconLibrary) {
       case 'Ionicons':
@@ -61,34 +69,35 @@ const SettingsScreen: React.FC = () => {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <ScrollView style={styles.container}>
+  <SafeAreaView style={[{flex:1}, {backgroundColor}]}>
+      <ScrollView style={[{ flex: 1},  {backgroundColor}]}>
+      <Text style={[styles.title, {color:textColor}]} >Settings</Text>
         <TextInput
-          style={styles.searchInput}
+          style={[styles.searchInput, {backgroundColor: buttonBackgroundColor}]}
           placeholder="Search"
           value={searchText}
           onChangeText={setSearchText}
         />
-        <View style={styles.userSection}>
+        <View style={[styles.userSection, {backgroundColor:backgroundColorSection}]}>
           <Image source={{ uri: userOptions.profileImage }} style={styles.profileImage} />
           <View>
-            <Text style={styles.userName}>{userOptions.name}</Text>
-            <Text style={styles.userStatus}>{userOptions.status}</Text>
+            <Text style={[styles.userName, {color: textColor}]}>{userOptions.name}</Text>
+            <Text style={[styles.userStatus,  {color: textStatus}]}>{userOptions.status}</Text>
           </View>
         </View>
-        <View style={styles.section}>
+        <View style={[styles.section, {backgroundColor:backgroundColorSection}]}>
           {firstOptions.map((option) => (
             <TouchableOpacity key={option.id} style={styles.option}>
               {renderIcon(option)}
-              <Text style={styles.label}>{option.label}</Text>
+              <Text style={[styles.label, {color: textColor}]}>{option.label}</Text>
             </TouchableOpacity>
           ))}
         </View>
-        <View style={styles.section}>
+        <View style={[styles.section, {backgroundColor:backgroundColorSection}]}>
           {secondOptions.map((option) => (
             <TouchableOpacity key={option.id} style={styles.option}>
               {renderIcon(option)}
-              <Text style={styles.label}>{option.label}</Text>
+              <Text style={[styles.label, {color: textColor}]}>{option.label}</Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -96,7 +105,7 @@ const SettingsScreen: React.FC = () => {
           {thirdOptions.map((option) => (
             <TouchableOpacity key={option.id} style={styles.option}>
               {renderIcon(option)}
-              <Text style={styles.label}>{option.label}</Text>
+              <Text style={[styles.label, {color: textColor}]}>{option.label}</Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -105,7 +114,7 @@ const SettingsScreen: React.FC = () => {
           {otherOptions.map((option) => (
             <TouchableOpacity key={option.id} style={styles.option}>
               {renderIcon(option)}
-              <Text style={styles.label}>{option.label}</Text>
+              <Text style={[styles.label, {color: textColor}]}>{option.label}</Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -115,20 +124,15 @@ const SettingsScreen: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+  title:{
+    fontWeight: 'bold',
+    marginHorizontal: 10,
+    fontSize: 25,
   },
   userSection: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
     marginBottom: 20,
   },
   profileImage: {
@@ -140,24 +144,19 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#333',
   },
   userStatus: {
     fontSize: 14,
-    color: '#777',
   },
   searchInput: {
     padding: 10,
     margin: 16,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#ddd',
-    backgroundColor: '#f9f9f9',
+    borderColor: 'transparent',
   },
   section: {
     marginBottom: 30,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
   },
   sectionTitle: {
     fontSize: 14,
@@ -169,15 +168,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
   },
   icon: {
     marginRight: 16,
   },
   label: {
     fontSize: 16,
-    color: '#333',
   },
 });
 

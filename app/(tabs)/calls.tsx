@@ -1,10 +1,17 @@
 import { useState} from 'react';
 import { View, Text, StyleSheet,SafeAreaView, TextInput, TouchableOpacity, FlatList} from 'react-native';
 import HeaderCalls from '@/components/HeaderCalls';
+import { useThemeColor } from '@/hooks/useThemeColor';
 
 const CallsScreen: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [favorites, setFavorites] = useState<string[]>([]);
+
+  const backgroundColor = useThemeColor({}, 'backgroundCalls');
+  const backgroundColorSearch = useThemeColor({}, 'background');
+  const buttonBackgroundColor = useThemeColor({}, 'buttonBackgroundTabs');
+  const textColor = useThemeColor({}, 'text');
+
 
   const handleAddFavorite = () => {
     if (searchQuery.trim()) {
@@ -12,22 +19,21 @@ const CallsScreen: React.FC = () => {
       setSearchQuery('');
     }
   };
-
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, {backgroundColor}]}>
       <HeaderCalls />
-      <Text style={styles.title} >Calls</Text>
+      <Text style={[styles.title, {color:textColor}]} >Calls</Text>
       <TextInput
-        style={styles.searchInput}
+        style={[styles.searchInput, {backgroundColor: buttonBackgroundColor}]}
         placeholder="Search"
         value={searchQuery}
         onChangeText={setSearchQuery}
       />
       <View style={styles.favoritesContainer}>
-        <Text style={styles.favoritesTitle}>Favorites</Text>
+        <Text style={[styles.favoritesTitle, {color:textColor}]}>Favorites</Text>
       </View>
-      <TouchableOpacity style={styles.addButton} onPress={handleAddFavorite}>
-        <Text style={styles.addButtonText}>Add favorite</Text>
+      <TouchableOpacity style={[styles.addButton, {backgroundColor: backgroundColorSearch}]} onPress={handleAddFavorite}>
+        <Text style={[styles.addButtonText, {color: textColor}]}>Add favorite</Text>
       </TouchableOpacity>
       <View style={styles.content}>
         <Text>llamaditas</Text>
@@ -39,7 +45,6 @@ const CallsScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1, 
-    backgroundColor: '#f5f5f5',
   },
   title:{
     fontWeight: 'bold',
@@ -49,27 +54,22 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     padding: 30,
-    borderBottomWidth: 2,
-    borderBottomColor: '#ccc',
     justifyContent: 'center',
   },
   searchInput: {
     margin: 10,
     padding: 8,
-    borderColor: '#f5f5f5',
+    borderColor: 'transparent',
     borderWidth: 1,
     borderRadius: 10,
-    backgroundColor: '#eeecea',
   },
   addButton: {
     marginHorizontal: 10,
-    padding: 10,
-    paddingHorizontal:20,
-    backgroundColor: 'white',
+    paddingVertical: 10,
+    paddingHorizontal: 8,
     borderRadius: 10,
   },
   addButtonText: {
-    color: 'black',
     textAlign: 'left'
   },
   favoritesContainer: {
@@ -81,17 +81,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
   },
-  favoriteItem: {
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    fontSize: 16,
-  },
-  emptyText: {
-    color: '#aaa',
-    textAlign: 'center',
-    marginTop: 20,
-  },
+
 });
 
 export default CallsScreen;

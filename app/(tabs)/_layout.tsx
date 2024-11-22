@@ -6,17 +6,21 @@ import CommunitiesScreen from './communities';
 import ChatsScreen from './chats';
 import SettingsScreen from './settings'; 
 import { StyleSheet } from 'react-native';
+import { useThemeColor } from '@/hooks/useThemeColor';
 
 const Tab = createBottomTabNavigator();
 
 const Layout = () => {
+  const backgroundColor = useThemeColor({}, 'backgroundColorTab');
+  const tabBarActiveColor = useThemeColor({}, 'tabBarActiveTintColor');
+  const tabBarInactiveColor=  useThemeColor({}, 'tabBarInactiveTintColor'); 
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarStyle: styles.tabBar,
+        tabBarStyle: [styles.tabBar, {backgroundColor}],
         tabBarLabelStyle: styles.tabBarLabel,
-        tabBarActiveTintColor: 'white',
-        tabBarInactiveTintColor: 'lightgray',
+        tabBarActiveTintColor: tabBarActiveColor,
+        tabBarInactiveTintColor: tabBarInactiveColor,
         headerShown: false,
       }}
     >
@@ -24,35 +28,35 @@ const Layout = () => {
         name="Chats"
         component={ChatsScreen}
         options={{
-          tabBarIcon: ({ color }) => <Ionicons name="chatbubbles" size={20} color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons name="chatbubbles" size={24} color={color} />,
         }}
       />
       <Tab.Screen
         name="Calls"
         component={CallsScreen}
         options={{
-          tabBarIcon: ({ color }) => <Ionicons name="call" size={20} color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons name="call" size={24} color={color} />,
         }}
       />
       <Tab.Screen
         name="Updates"
         component={UpdatesScreen}
         options={{
-          tabBarIcon: ({ color }) => <Ionicons name="information-circle" size={20} color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons name="information-circle" size={24} color={color} />,
         }}
       />
       <Tab.Screen
         name="Communities"
         component={CommunitiesScreen}
         options={{
-          tabBarIcon: ({ color }) => <MaterialIcons name="group" size={20} color={color} />,
+          tabBarIcon: ({ color }) => <MaterialIcons name="group" size={24} color={color} />,
         }}
       />
       <Tab.Screen
         name="Settings"
         component={SettingsScreen}
         options={{
-          tabBarIcon: ({ color }) => <Ionicons name="settings" size={20} color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons name="settings" size={24} color={color} />,
         }}
       />
     </Tab.Navigator>
@@ -63,13 +67,12 @@ export default Layout;
 
 const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: '#075E54',
     borderTopWidth: 0,
     paddingTop: 15,
     height: 80,
   },
   tabBarLabel: {
-    fontSize: 14,
+    fontSize: 10,
     marginBottom: 0,
   },
 });

@@ -6,9 +6,9 @@ import { useThemeColor } from '@/hooks/useThemeColor';
 const HeaderCalls: React.FC = () => {
   const [filter, setFilter] = useState<'all' | 'missed'>('all');
 
-  const backgroundColor = useThemeColor({}, 'headerCalls');
-  const buttonBackgroundColor = useThemeColor({}, 'buttonBackground');
-  const buttonActiveColor = useThemeColor({}, 'buttonActive');
+  const backgroundColor = useThemeColor({}, 'backgroundCalls');
+  const buttonBackgroundColor = useThemeColor({}, 'buttonBackgroundTabs');
+  const buttonActiveColor = useThemeColor({}, 'buttonOnCalls');
   const textColor = useThemeColor({}, 'text');
 
   const handleAllPress = () => {
@@ -25,7 +25,7 @@ const HeaderCalls: React.FC = () => {
       <View style={[styles.principalContainer, { backgroundColor }]}>
         <View style={styles.firstContainer}>
           <TouchableOpacity style={[styles.iconContainer,{backgroundColor: buttonBackgroundColor}]}>
-            <Ionicons name="ellipsis-horizontal" size={24} color={textColor}/>
+            <Ionicons name="ellipsis-horizontal" size={20} color={textColor}/>
           </TouchableOpacity>
         </View>
         <View style={styles.secondContainer}>
@@ -44,8 +44,8 @@ const HeaderCalls: React.FC = () => {
           </View>
         </View>
         <View style={styles.thirdContainer}>
-        <TouchableOpacity style={[styles.iconContainer, { backgroundColor: buttonBackgroundColor }]}>
-            <AntDesign name="plus" size={24} color={textColor} />
+          <TouchableOpacity style={[styles.iconContainer, { backgroundColor: buttonBackgroundColor }]}>
+            <AntDesign name="plus" size={20} color={textColor} />
           </TouchableOpacity>
         </View>
       </View>
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
   iconContainer: {
     padding: 4,
     borderRadius: 50,
+    marginHorizontal: 10
   },
   buttonBox: {
     flexDirection: 'row',
