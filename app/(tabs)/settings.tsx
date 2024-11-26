@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, TextInput,Image} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, TextInput, Image } from 'react-native';
 import { Ionicons, MaterialIcons, Entypo, FontAwesome6 } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useThemeColor } from '@/hooks/useThemeColor';
+import { widthSizes, heightSizes } from '@/constants/Sizes';
 
 type IconLibrary = 'Ionicons' | 'MaterialIcons' | 'Entypo' | 'FontAwesome6';
 
@@ -12,12 +13,14 @@ type SettingsOption = {
   icon: string;
   iconLibrary: IconLibrary;
 };
+
 const userOptions = { 
   id: '0', 
   name: 'Juanito Perez', 
   status: 'Available', 
   profileImage: 'https://i0.wp.com/ilusiono.com/wp-content/uploads/2024/03/61f9f108-ccda-452f-994f-7f78ba4f5571.jpg?w=1024&ssl=1' 
 };
+
 const firstOptions: SettingsOption[] = [
   { id: '1', label: 'Lists', icon: 'albums', iconLibrary: 'Ionicons' },
   { id: '2', label: 'Broadcast messages', icon: 'megaphone', iconLibrary: 'Ionicons' },
@@ -48,11 +51,12 @@ const SettingsScreen: React.FC = () => {
   const [searchText, setSearchText] = useState('');
 
   const backgroundColor = useThemeColor({}, 'backgroundCalls');
-  const backgroundColorSection = useThemeColor({}, 'background')
+  const backgroundColorSection = useThemeColor({}, 'background');
   const textColor = useThemeColor({}, 'text');
   const textStatus = useThemeColor({}, 'textBackgroundTabs');
   const buttonBackgroundColor = useThemeColor({}, 'buttonBackgroundTabs');
-  const icon = useThemeColor({}, 'icon');
+  const borderColor = useThemeColor({}, 'borderColor');
+  
   const renderIcon = (option: SettingsOption) => {
     switch (option.iconLibrary) {
       case 'Ionicons':
@@ -69,11 +73,11 @@ const SettingsScreen: React.FC = () => {
   };
 
   return (
-  <SafeAreaView style={[{flex:1}, {backgroundColor}]}>
-      <ScrollView style={[{ flex: 1},  {backgroundColor}]}>
-      <Text style={[styles.title, {color:textColor}]} >Settings</Text>
+    <SafeAreaView style={[{flex:1}, {backgroundColor}]}>
+      <ScrollView style={[{ flex: 1}, {backgroundColor}]}>
+        <Text style={[styles.title, {color:textColor}]} >Settings</Text>
         <TextInput
-          style={[styles.searchInput, {backgroundColor: buttonBackgroundColor}]}
+          style={[styles.searchInput, {backgroundColor: buttonBackgroundColor, borderColor: borderColor}]}
           placeholder="Search"
           value={searchText}
           onChangeText={setSearchText}
@@ -82,7 +86,7 @@ const SettingsScreen: React.FC = () => {
           <Image source={{ uri: userOptions.profileImage }} style={styles.profileImage} />
           <View>
             <Text style={[styles.userName, {color: textColor}]}>{userOptions.name}</Text>
-            <Text style={[styles.userStatus,  {color: textStatus}]}>{userOptions.status}</Text>
+            <Text style={[styles.userStatus, {color: textStatus}]}>{userOptions.status}</Text>
           </View>
         </View>
         <View style={[styles.section, {backgroundColor:backgroundColorSection}]}>
@@ -110,7 +114,7 @@ const SettingsScreen: React.FC = () => {
           ))}
         </View>
         <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Also from Meta</Text>
+          <Text style={styles.sectionTitle}>Also from Meta</Text>
           {otherOptions.map((option) => (
             <TouchableOpacity key={option.id} style={styles.option}>
               {renderIcon(option)}
@@ -124,22 +128,22 @@ const SettingsScreen: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  title:{
+  title: {
     fontWeight: 'bold',
-    marginHorizontal: 10,
+    marginHorizontal: widthSizes[10],
     fontSize: 25,
   },
   userSection: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 16,
-    marginBottom: 20,
+    padding: widthSizes[16],
+    marginBottom: heightSizes[20],
   },
   profileImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginRight: 16,
+    width: widthSizes[50],
+    height: widthSizes[50],
+    borderRadius: widthSizes[25],
+    marginRight: widthSizes[16],
   },
   userName: {
     fontSize: 18,
@@ -149,28 +153,27 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   searchInput: {
-    padding: 10,
-    margin: 16,
-    borderRadius: 10,
+    padding: widthSizes[10],
+    margin: widthSizes[16],
+    borderRadius: widthSizes[10],
     borderWidth: 1,
-    borderColor: 'transparent',
   },
   section: {
-    marginBottom: 30,
+    marginBottom: heightSizes[30],
   },
   sectionTitle: {
     fontSize: 14,
     color: 'grey',
-    paddingVertical: 10,
-    paddingHorizontal: 16,
+    paddingVertical: heightSizes[10],
+    paddingHorizontal: widthSizes[16],
   },
   option: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 16,
+    padding: widthSizes[16],
   },
   icon: {
-    marginRight: 16,
+    marginRight: widthSizes[16],
   },
   label: {
     fontSize: 16,

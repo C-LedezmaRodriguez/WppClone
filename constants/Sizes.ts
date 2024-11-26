@@ -26,8 +26,11 @@ const widthSizes = {
   20: scaleWidth(20),
   15: scaleWidth(15),
   18: scaleWidth(18),
+  16: scaleWidth(16),
   10: scaleWidth(10),
+  8: scaleWidth(8),
   7: scaleWidth(7),
+  6: scaleWidth(6),
   5: scaleWidth(5),
   3: scaleWidth(3),
   2: scaleWidth(2),
@@ -57,7 +60,10 @@ const heightSizes = {
   15: scaleHeight(15),
   13: scaleHeight(13),
   10: scaleHeight(10),
+  8: scaleHeight(8),
   5: scaleHeight(5),
+  1: scaleHeight(1),
+  0.2: scaleHeight(0.2),
 };
 
 const fontSizes = {

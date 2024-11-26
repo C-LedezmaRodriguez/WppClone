@@ -6,10 +6,9 @@ import { ChatDetail } from '@/models/chats';
 import Header from '@/components/HeaderChats';
 import { AntDesign } from '@expo/vector-icons';
 import { useThemeColor } from '@/hooks/useThemeColor';
-
+import { widthSizes, heightSizes } from '@/constants/Sizes';
 
 const ChatsScreen: React.FC = () => {
-
   const searchInputColor = useThemeColor({}, 'searchInput');
   const backgroundColor = useThemeColor({}, 'background');
   const textColor = useThemeColor({}, 'text');
@@ -18,6 +17,7 @@ const ChatsScreen: React.FC = () => {
   const filterButtonColor = useThemeColor({}, 'textBackgroundTabs');
   const textSearchColor = useThemeColor({}, 'textSearch');
   const buttonBackgroundTabsColor = useThemeColor({}, 'buttonBackgroundTabs')
+  const borderColor = useThemeColor({}, 'borderColor');
 
   const userId = 'SObya8AzAYBgI98kdAcc';
   const chats: ChatDetail[] = useChats(userId);
@@ -65,62 +65,33 @@ const ChatsScreen: React.FC = () => {
       <Header />
       <Text style={[styles.title, { color: textColor }]}>Chats</Text>
       <TextInput
-        style={[styles.searchInput, { backgroundColor: searchInputColor }]} 
+        style={[styles.searchInput, { backgroundColor: searchInputColor, borderColor: borderColor }]} 
         placeholder="Ask Meta AI or Search"
         value={searchQuery}
         onChangeText={setSearchQuery}
       />
       <View style={styles.filterContainer}>
-        <TouchableOpacity 
-          onPress={() => applyFilter('all')} 
-          style={[styles.btnFilter,
-            { backgroundColor: filter === 'all' ? btnBackgroundFilterChat : buttonBackgroundTabsColor}
-          ]}
-        >
-          <Text 
-            style={[styles.filterText, {color: filter === 'all' ? activeFilterColor : filterButtonColor}]} 
+        {['all', 'unread', 'favorites', 'groups'].map((type) => (
+          <TouchableOpacity
+            key={type}
+            onPress={() => applyFilter(type as typeof filter)}
+            style={[
+              styles.btnFilter,
+              { backgroundColor: filter === type ? btnBackgroundFilterChat : buttonBackgroundTabsColor },
+            ]}
           >
-            All
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          onPress={() => applyFilter('unread')} 
-          style={[styles.btnFilter,
-            { backgroundColor: filter === 'unread' ? btnBackgroundFilterChat : buttonBackgroundTabsColor }
-          ]}
-        >
-          <Text 
-            style={[styles.filterText, {color: filter === 'unread' ? activeFilterColor : filterButtonColor}]}  
-          >
-            Unread
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          onPress={() => applyFilter('favorites')} 
-          style={[styles.btnFilter,
-            { backgroundColor: filter === 'favorites' ? btnBackgroundFilterChat : buttonBackgroundTabsColor }
-          ]}
-        >
-          <Text 
-            style={[styles.filterText, { color: filter === 'favorites' ? activeFilterColor:filterButtonColor }]}
-          >
-            Favorites
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          onPress={() => applyFilter('groups')} 
-          style={[styles.btnFilter,
-            { backgroundColor: filter === 'groups' ? btnBackgroundFilterChat : buttonBackgroundTabsColor}
-          ]}
-        >
-          <Text 
-            style={[styles.filterText, { color: filter === 'groups' ? activeFilterColor: filterButtonColor }]} 
-          >
-            Groups
-          </Text>
-        </TouchableOpacity>
+            <Text
+              style={[
+                styles.filterText,
+                { color: filter === type ? activeFilterColor : filterButtonColor },
+              ]}
+            >
+              {type.charAt(0).toUpperCase() + type.slice(1)}
+            </Text>
+          </TouchableOpacity>
+        ))}
         <TouchableOpacity style={[styles.iconContainer, { backgroundColor: buttonBackgroundTabsColor }]}>
-          <AntDesign name="plus" size={20} color={filterButtonColor} />
+          <AntDesign name="plus" size={widthSizes[20]} color={filterButtonColor} />
         </TouchableOpacity>
       </View>
       <FlatList
@@ -138,13 +109,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: 'bold',
-    margin: 10,
-    fontSize: 25,
+    margin: widthSizes[10],
   },
   chatContainer: {
     flexDirection: 'row',
-    padding: 20,
-    borderBottomWidth: 0.2,
+    padding: widthSizes[20],
+    borderBottomWidth: heightSizes[0.2],
     alignItems: 'center',
   },
   chatDetails: {
@@ -153,40 +123,31 @@ const styles = StyleSheet.create({
   sender: {
     fontWeight: 'bold',
   },
-  lastMessage: {
-    color: 'transparent', 
-  },
-  timestamp: {
-    fontSize: 10,
-    color: 'transparent', 
-  },
+  lastMessage: {},
+  timestamp: {},
   searchInput: {
-    margin: 10,
-    padding: 8,
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: 'transparent'
+    margin: widthSizes[10],
+    padding: widthSizes[8],
+    borderWidth: heightSizes[1],
+    borderRadius: widthSizes[10],
   },
   filterContainer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    paddingVertical: 10,
+    paddingVertical: heightSizes[10],
   },
-  btnFilter:{
-    borderRadius: 20,
-    paddingHorizontal:8,
+  btnFilter: {
+    borderRadius: widthSizes[20],
+    paddingHorizontal: widthSizes[8],
   },
   filterText: {
-    padding: 8,
-    fontWeight:'600'
-  },
-  activeFilterText: {
+    padding: widthSizes[8],
     fontWeight: '600',
   },
   iconContainer: {
-    paddingHorizontal: 6,
-    borderRadius: 50,
-    justifyContent: 'center'
+    paddingHorizontal: widthSizes[6],
+    borderRadius: widthSizes[50],
+    justifyContent: 'center',
   },
 });
 

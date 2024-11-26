@@ -26,6 +26,7 @@ export const Colors = {
     backgroundColorTab: 'rgba(255, 250, 250, 0.8)',
     tabBarActiveTintColor: '#11181C',
     tabBarInactiveTintColor: '#a9a9a9',
+    borderColor:'transparent',
   },
   dark: {
     text: '#ECEDEE',
@@ -46,6 +47,7 @@ export const Colors = {
     backgroundColorTab: 'rgba(10 , 15, 10, 0.8)',
     tabBarActiveTintColor: '#ffffff',
     tabBarInactiveTintColor: '#6C7177',
+    borderColor:'transparent',
   },
 };
 

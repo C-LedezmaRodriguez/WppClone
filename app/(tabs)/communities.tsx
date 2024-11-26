@@ -1,10 +1,14 @@
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import { useThemeColor } from '@/hooks/useThemeColor';
 
-const CommunitiesScreen: React.FC = () => {
+const UpdatesScreen: React.FC = () => {
+  const backgroundColor = useThemeColor({}, 'background')
+  const textColor = useThemeColor({},'text')
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, {backgroundColor}]}>
       <View style={styles.content}>
-        <Text>Comunidades</Text>
+        <Text style={[styles.text,{color:textColor}]}>comunidades</Text>
       </View>
     </SafeAreaView>
   );
@@ -13,15 +17,16 @@ const CommunitiesScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1, 
-    backgroundColor: 'white',
   },
   content: {
     flex: 1,
     padding: 30,
     borderBottomWidth: 2,
-    borderBottomColor: '#ccc',
     justifyContent: 'center',
   },
+  text:{
+    fontSize: 16
+  }
 });
 
-export default CommunitiesScreen;
+export default UpdatesScreen;
