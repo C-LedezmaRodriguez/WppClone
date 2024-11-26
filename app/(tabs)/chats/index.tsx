@@ -1,28 +1,33 @@
-import { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, SafeAreaView, TextInput } from 'react-native';
-import { useRouter } from 'expo-router';
-import useChats from '@/hooks/useChats';
-import { ChatDetail } from '@/models/chats';
-import Header from '@/components/HeaderChats';
+import React, { useState, useEffect, FC } from 'react';
+import { View, FlatList, StyleSheet, TouchableOpacity, SafeAreaView, TextInput } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+
+import TextApp from '@/components/TextApp';
+import Header from '@/components/HeaderChats';
+
+import useChats from '@/hooks/useChats';
 import { useThemeColor } from '@/hooks/useThemeColor';
+
 import { widthSizes, heightSizes } from '@/constants/Sizes';
 
-const ChatsScreen: React.FC = () => {
+import { ChatDetail } from '@/models/chats';
+
+const ChatsScreen: FC = () => {
   const searchInputColor = useThemeColor({}, 'searchInput');
   const backgroundColor = useThemeColor({}, 'background');
   const textColor = useThemeColor({}, 'text');
   const btnBackgroundFilterChat = useThemeColor({}, 'btnBackgroundFilterChat');
-  const activeFilterColor = useThemeColor({}, 'buttonFilterTextChat'); 
+  const activeFilterColor = useThemeColor({}, 'buttonFilterTextChat');
   const filterButtonColor = useThemeColor({}, 'textBackgroundTabs');
   const textSearchColor = useThemeColor({}, 'textSearch');
-  const buttonBackgroundTabsColor = useThemeColor({}, 'buttonBackgroundTabs')
+  const buttonBackgroundTabsColor = useThemeColor({}, 'buttonBackgroundTabs');
   const borderColor = useThemeColor({}, 'borderColor');
 
   const userId = 'SObya8AzAYBgI98kdAcc';
   const chats: ChatDetail[] = useChats(userId);
-  const [filteredChats, setFilteredChats] = useState<ChatDetail[]>(chats); 
-  const [filter, setFilter] = useState<'all' | 'unread' | 'favorites' | 'groups' >('all'); 
+  const [filteredChats, setFilteredChats] = useState<ChatDetail[]>(chats);
+  const [filter, setFilter] = useState<'all' | 'unread' | 'favorites' | 'groups'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const router = useRouter();
 
@@ -33,11 +38,11 @@ const ChatsScreen: React.FC = () => {
   const applyFilter = (type: 'all' | 'unread' | 'favorites' | 'groups') => {
     setFilter(type);
     if (type === 'unread') {
-      setFilteredChats(chats.filter(chat => chat.messages?.length === 0));
+      setFilteredChats(chats.filter((chat) => chat.messages?.length === 0));
     } else if (type === 'groups') {
-      setFilteredChats(chats.filter(chat => chat.name.includes('Group')));
+      setFilteredChats(chats.filter((chat) => chat.name.includes('Group')));
     } else if (type === 'favorites') {
-      setFilteredChats(chats.filter(chat => chat.name.includes('Favorites'))); 
+      setFilteredChats(chats.filter((chat) => chat.name.includes('Favorites')));
     } else {
       setFilteredChats(chats);
     }
@@ -45,27 +50,29 @@ const ChatsScreen: React.FC = () => {
 
   const renderItem = ({ item }: { item: ChatDetail }) => (
     <TouchableOpacity
-      style={[styles.chatContainer, { backgroundColor }]} 
+      style={[styles.chatContainer, { backgroundColor }]}
       onPress={() => router.push(`/chats/${item.id}`)}
     >
       <View style={styles.chatDetails}>
-        <Text style={[styles.sender, { color: textColor }]}>{item.name}</Text>
-        <Text style={[styles.lastMessage, { color: textColor }]}>{item.messages?.[0]?.message || "No messages yet"}</Text>
-        <Text style={[styles.timestamp, { color: textSearchColor }]}>
-          {item.messages?.[0]?.createdAt 
-            ? new Date(item.messages[0].createdAt).toLocaleTimeString() 
-            : ""}
-        </Text>
+        <TextApp style={[{ color: textColor }]} text={item.name} fontWeight={'bold'} />
+        <TextApp
+          style={[styles.lastMessage, { color: textColor }]}
+          text={item.messages?.[0]?.message || 'No messages yet'}
+        />
+        <TextApp
+          style={[styles.timestamp, { color: textSearchColor }]}
+          text={item.messages?.[0]?.createdAt ? new Date(item.messages[0].createdAt).toLocaleTimeString() : ''}
+        />
       </View>
-    </TouchableOpacity> 
+    </TouchableOpacity>
   );
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor }]}>
       <Header />
-      <Text style={[styles.title, { color: textColor }]}>Chats</Text>
+      <TextApp style={[styles.title, { color: textColor }]} text={'Chats'} fontWeight={'bold'} />
       <TextInput
-        style={[styles.searchInput, { backgroundColor: searchInputColor, borderColor: borderColor }]} 
+        style={[styles.searchInput, { backgroundColor: searchInputColor, borderColor: borderColor }]}
         placeholder="Ask Meta AI or Search"
         value={searchQuery}
         onChangeText={setSearchQuery}
@@ -80,25 +87,18 @@ const ChatsScreen: React.FC = () => {
               { backgroundColor: filter === type ? btnBackgroundFilterChat : buttonBackgroundTabsColor },
             ]}
           >
-            <Text
-              style={[
-                styles.filterText,
-                { color: filter === type ? activeFilterColor : filterButtonColor },
-              ]}
-            >
-              {type.charAt(0).toUpperCase() + type.slice(1)}
-            </Text>
+            <TextApp
+              style={[styles.filterText, { color: filter === type ? activeFilterColor : filterButtonColor }]}
+              text={type.charAt(0).toUpperCase() + type.slice(1)}
+              fontWeight={'600'}
+            />
           </TouchableOpacity>
         ))}
         <TouchableOpacity style={[styles.iconContainer, { backgroundColor: buttonBackgroundTabsColor }]}>
           <AntDesign name="plus" size={widthSizes[20]} color={filterButtonColor} />
         </TouchableOpacity>
       </View>
-      <FlatList
-        data={filteredChats}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-      />
+      <FlatList data={filteredChats} keyExtractor={(item) => item.id} renderItem={renderItem} />
     </SafeAreaView>
   );
 };
@@ -108,7 +108,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontWeight: 'bold',
     margin: widthSizes[10],
   },
   chatContainer: {
@@ -119,9 +118,6 @@ const styles = StyleSheet.create({
   },
   chatDetails: {
     flexDirection: 'column',
-  },
-  sender: {
-    fontWeight: 'bold',
   },
   lastMessage: {},
   timestamp: {},
@@ -142,7 +138,6 @@ const styles = StyleSheet.create({
   },
   filterText: {
     padding: widthSizes[8],
-    fontWeight: '600',
   },
   iconContainer: {
     paddingHorizontal: widthSizes[6],

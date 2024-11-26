@@ -1,8 +1,9 @@
-
 import { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
-import uploadMessages from '../scripts/uploadMessages'; 
+import uploadMessages from '../scripts/uploadMessages';
+import TextApp from '@/components/TextApp';
+import { fontSizes } from '@/constants/Sizes';
 
 export default function IndexScreen() {
   const [loading, setLoading] = useState(true);
@@ -11,25 +12,25 @@ export default function IndexScreen() {
   useEffect(() => {
     const loadMessagesAndRedirect = async () => {
       try {
-        await uploadMessages(); 
+        await uploadMessages();
       } catch (error) {
         console.error('Error al cargar los mensajes:', error);
       } finally {
         setLoading(false);
-        router.replace('/(tabs)' as any); 
+        router.replace('/(tabs)' as any);
       }
     };
 
     const timer = setTimeout(() => {
-      loadMessagesAndRedirect(); 
+      loadMessagesAndRedirect();
     }, 3000);
 
-    return () => clearTimeout(timer); 
+    return () => clearTimeout(timer);
   }, [router]);
 
   return (
     <View style={styles.loadingContainer}>
-      {loading ? <Text style={styles.loadingText}>Loading...</Text> : null}
+      {loading ? <TextApp style={styles.loadingText} text={'Loading...'} fontWeight={'bold'} /> : null}
     </View>
   );
 }
@@ -41,7 +42,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   loadingText: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: fontSizes[20],
   },
 });

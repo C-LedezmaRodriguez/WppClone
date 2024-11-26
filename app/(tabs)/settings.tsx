@@ -1,9 +1,12 @@
-import { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, TextInput, Image } from 'react-native';
+import React, { FC, useState } from 'react';
+import { View, TouchableOpacity, StyleSheet, ScrollView, TextInput, Image } from 'react-native';
 import { Ionicons, MaterialIcons, Entypo, FontAwesome6 } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import TextApp from '@/components/TextApp';
+
 import { useThemeColor } from '@/hooks/useThemeColor';
-import { widthSizes, heightSizes } from '@/constants/Sizes';
+import { widthSizes, heightSizes, fontSizes } from '@/constants/Sizes';
 
 type IconLibrary = 'Ionicons' | 'MaterialIcons' | 'Entypo' | 'FontAwesome6';
 
@@ -14,11 +17,12 @@ type SettingsOption = {
   iconLibrary: IconLibrary;
 };
 
-const userOptions = { 
-  id: '0', 
-  name: 'Juanito Perez', 
-  status: 'Available', 
-  profileImage: 'https://i0.wp.com/ilusiono.com/wp-content/uploads/2024/03/61f9f108-ccda-452f-994f-7f78ba4f5571.jpg?w=1024&ssl=1' 
+const userOptions = {
+  id: '0',
+  name: 'Juanito Perez',
+  status: 'Available',
+  profileImage:
+    'https://i0.wp.com/ilusiono.com/wp-content/uploads/2024/03/61f9f108-ccda-452f-994f-7f78ba4f5571.jpg?w=1024&ssl=1',
 };
 
 const firstOptions: SettingsOption[] = [
@@ -47,7 +51,7 @@ const otherOptions: SettingsOption[] = [
   { id: '14', label: 'Threads', icon: 'threads', iconLibrary: 'FontAwesome6' },
 ];
 
-const SettingsScreen: React.FC = () => {
+const SettingsScreen: FC = () => {
   const [searchText, setSearchText] = useState('');
 
   const backgroundColor = useThemeColor({}, 'backgroundCalls');
@@ -56,52 +60,75 @@ const SettingsScreen: React.FC = () => {
   const textStatus = useThemeColor({}, 'textBackgroundTabs');
   const buttonBackgroundColor = useThemeColor({}, 'buttonBackgroundTabs');
   const borderColor = useThemeColor({}, 'borderColor');
-  
+
   const renderIcon = (option: SettingsOption) => {
     switch (option.iconLibrary) {
       case 'Ionicons':
-        return <Ionicons name={option.icon as keyof typeof Ionicons.glyphMap} size={24} color="#075E54" style={styles.icon} />;
+        return (
+          <Ionicons
+            name={option.icon as keyof typeof Ionicons.glyphMap}
+            size={widthSizes[20]}
+            color="#075E54"
+            style={styles.icon}
+          />
+        );
       case 'MaterialIcons':
-        return <MaterialIcons name={option.icon as keyof typeof MaterialIcons.glyphMap} size={24} color="#075E54" style={styles.icon} />;
+        return (
+          <MaterialIcons
+            name={option.icon as keyof typeof MaterialIcons.glyphMap}
+            size={widthSizes[20]}
+            color="#075E54"
+            style={styles.icon}
+          />
+        );
       case 'Entypo':
-        return <Entypo name={option.icon as keyof typeof Entypo.glyphMap} size={24} color="#075E54" style={styles.icon} />;
+        return (
+          <Entypo name={option.icon as keyof typeof Entypo.glyphMap} size={24} color="#075E54" style={styles.icon} />
+        );
       case 'FontAwesome6':
-        return <FontAwesome6 name={option.icon as keyof typeof FontAwesome6.glyphMap} size={24} color="#075E54" style={styles.icon} />;
+        return (
+          <FontAwesome6
+            name={option.icon as keyof typeof FontAwesome6.glyphMap}
+            size={widthSizes[20]}
+            color="#075E54"
+            style={styles.icon}
+          />
+        );
       default:
         return null;
     }
   };
 
   return (
-    <SafeAreaView style={[{flex:1}, {backgroundColor}]}>
-      <ScrollView style={[{ flex: 1}, {backgroundColor}]}>
-        <Text style={[styles.title, {color:textColor}]} >Settings</Text>
+    <SafeAreaView style={[{ flex: 1 }, { backgroundColor }]}>
+      <ScrollView style={[{ flex: 1 }, { backgroundColor }]}>
+        <TextApp text={'Settings'} style={[styles.title, { color: textColor }]} fontWeight={'bold'} />
         <TextInput
-          style={[styles.searchInput, {backgroundColor: buttonBackgroundColor, borderColor: borderColor}]}
+          style={[styles.searchInput, { backgroundColor: buttonBackgroundColor, borderColor: borderColor }]}
           placeholder="Search"
           value={searchText}
           onChangeText={setSearchText}
         />
-        <View style={[styles.userSection, {backgroundColor:backgroundColorSection}]}>
+        <View style={[styles.userSection, { backgroundColor: backgroundColorSection }]}>
           <Image source={{ uri: userOptions.profileImage }} style={styles.profileImage} />
           <View>
-            <Text style={[styles.userName, {color: textColor}]}>{userOptions.name}</Text>
-            <Text style={[styles.userStatus, {color: textStatus}]}>{userOptions.status}</Text>
+            <TextApp text={userOptions.name} style={[styles.userName, { color: textColor }]} fontWeight={'bold'} />
+            <TextApp text={userOptions.status} style={[styles.userStatus, { color: textStatus }]} />
           </View>
         </View>
-        <View style={[styles.section, {backgroundColor:backgroundColorSection}]}>
+        <View style={[styles.section, { backgroundColor: backgroundColorSection }]}>
           {firstOptions.map((option) => (
             <TouchableOpacity key={option.id} style={styles.option}>
               {renderIcon(option)}
-              <Text style={[styles.label, {color: textColor}]}>{option.label}</Text>
+              <TextApp text={option.label} style={[styles.label, { color: textColor }]} />
             </TouchableOpacity>
           ))}
         </View>
-        <View style={[styles.section, {backgroundColor:backgroundColorSection}]}>
+        <View style={[styles.section, { backgroundColor: backgroundColorSection }]}>
           {secondOptions.map((option) => (
             <TouchableOpacity key={option.id} style={styles.option}>
               {renderIcon(option)}
-              <Text style={[styles.label, {color: textColor}]}>{option.label}</Text>
+              <TextApp text={option.label} style={[styles.label, { color: textColor }]} />
             </TouchableOpacity>
           ))}
         </View>
@@ -109,16 +136,16 @@ const SettingsScreen: React.FC = () => {
           {thirdOptions.map((option) => (
             <TouchableOpacity key={option.id} style={styles.option}>
               {renderIcon(option)}
-              <Text style={[styles.label, {color: textColor}]}>{option.label}</Text>
+              <TextApp text={option.label} style={[styles.label, { color: textColor }]} />
             </TouchableOpacity>
           ))}
         </View>
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Also from Meta</Text>
+          <TextApp text={'Also from Meta'} style={styles.sectionTitle} />
           {otherOptions.map((option) => (
             <TouchableOpacity key={option.id} style={styles.option}>
               {renderIcon(option)}
-              <Text style={[styles.label, {color: textColor}]}>{option.label}</Text>
+              <TextApp text={option.label} style={[styles.label, { color: textColor }]} />
             </TouchableOpacity>
           ))}
         </View>
@@ -129,9 +156,8 @@ const SettingsScreen: React.FC = () => {
 
 const styles = StyleSheet.create({
   title: {
-    fontWeight: 'bold',
     marginHorizontal: widthSizes[10],
-    fontSize: 25,
+    fontSize: fontSizes[25],
   },
   userSection: {
     flexDirection: 'row',
@@ -146,11 +172,10 @@ const styles = StyleSheet.create({
     marginRight: widthSizes[16],
   },
   userName: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: fontSizes[18],
   },
   userStatus: {
-    fontSize: 14,
+    fontSize: fontSizes[14],
   },
   searchInput: {
     padding: widthSizes[10],
@@ -162,7 +187,7 @@ const styles = StyleSheet.create({
     marginBottom: heightSizes[30],
   },
   sectionTitle: {
-    fontSize: 14,
+    fontSize: fontSizes[14],
     color: 'grey',
     paddingVertical: heightSizes[10],
     paddingHorizontal: widthSizes[16],
@@ -176,7 +201,7 @@ const styles = StyleSheet.create({
     marginRight: widthSizes[16],
   },
   label: {
-    fontSize: 16,
+    fontSize: fontSizes[16],
   },
 });
 

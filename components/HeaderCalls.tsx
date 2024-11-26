@@ -1,9 +1,13 @@
-import { useState } from 'react';
-import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, useColorScheme } from 'react-native';
+import React, { FC, useState } from 'react';
+import { SafeAreaView, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { AntDesign, Ionicons } from '@expo/vector-icons';
-import { useThemeColor } from '@/hooks/useThemeColor';
 
-const HeaderCalls: React.FC = () => {
+import TextApp from '@/components/TextApp';
+
+import { useThemeColor } from '@/hooks/useThemeColor';
+import {fontSizes, widthSizes} from "@/constants/Sizes";
+
+const HeaderCalls: FC = () => {
   const [filter, setFilter] = useState<'all' | 'missed'>('all');
 
   const backgroundColor = useThemeColor({}, 'backgroundCalls');
@@ -12,34 +16,43 @@ const HeaderCalls: React.FC = () => {
   const textColor = useThemeColor({}, 'text');
 
   const handleAllPress = () => {
-    setFilter('all')
+    setFilter('all');
     console.log('All pressed');
   };
 
   const handleMissedPress = () => {
-    setFilter('missed')
+    setFilter('missed');
     console.log('Missed pressed');
   };
   return (
     <SafeAreaView>
       <View style={[styles.principalContainer, { backgroundColor }]}>
         <View style={styles.firstContainer}>
-          <TouchableOpacity style={[styles.iconContainer,{backgroundColor: buttonBackgroundColor}]}>
-            <Ionicons name="ellipsis-horizontal" size={20} color={textColor}/>
+          <TouchableOpacity style={[styles.iconContainer, { backgroundColor: buttonBackgroundColor }]}>
+            <Ionicons name="ellipsis-horizontal" size={20} color={textColor} />
           </TouchableOpacity>
         </View>
         <View style={styles.secondContainer}>
-          <View style = {[styles.buttonBox, { backgroundColor: buttonBackgroundColor }]}>
-            <TouchableOpacity onPress={handleAllPress}
-                style={[styles.filterButton, filter === 'all' && { backgroundColor: buttonActiveColor }]}
+          <View style={[styles.buttonBox, { backgroundColor: buttonBackgroundColor }]}>
+            <TouchableOpacity
+              onPress={handleAllPress}
+              style={[styles.filterButton, filter === 'all' && { backgroundColor: buttonActiveColor }]}
             >
-              <Text style={[styles.filterText,{ color: textColor }, filter === 'all' && styles.activeFilterText]}>All</Text>
+              <TextApp
+                style={[styles.filterText, { color: textColor }]}
+                text={'All'}
+                fontWeight={filter === 'all' ? 'normal' : '600'}
+              />
             </TouchableOpacity>
             <TouchableOpacity
               onPress={handleMissedPress}
               style={[styles.filterButton, filter === 'missed' && { backgroundColor: buttonActiveColor }]}
             >
-              <Text style={[styles.filterText, { color: textColor }, filter === 'missed' && styles.activeFilterText]}>Missed</Text>
+              <TextApp
+                style={[styles.filterText, { color: textColor }]}
+                text={'Missed'}
+                fontWeight={filter === 'missed' ? 'normal' : '600'}
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -58,7 +71,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 10,
+    paddingVertical: widthSizes[10],
   },
   firstContainer: {
     flexDirection: 'row',
@@ -70,37 +83,34 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
-    paddingRight: 16
+    paddingRight: widthSizes[16],
   },
   thirdContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
     flex: 1,
-    paddingRight: 16
+    paddingRight: widthSizes[16],
   },
   iconContainer: {
-    padding: 4,
+    padding: widthSizes[4],
     borderRadius: 50,
-    marginHorizontal: 10
+    marginHorizontal: widthSizes[10],
   },
   buttonBox: {
     flexDirection: 'row',
-    padding: 3,
+    padding: widthSizes[3],
     borderRadius: 8,
   },
   filterButton: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingHorizontal: widthSizes[10],
+    paddingVertical: widthSizes[5],
     borderRadius: 8,
   },
   filterText: {
-    fontSize: 14,
-    width: 50,
+    fontSize: fontSizes[14],
+    width: widthSizes[50],
     textAlign: 'center',
-  },
-  activeFilterText: {
-    fontWeight: '600',
   },
 });
 

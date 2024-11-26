@@ -1,10 +1,13 @@
-import { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, TextInput, TouchableOpacity } from 'react-native';
-import HeaderCalls from '@/components/HeaderCalls';
-import { useThemeColor } from '@/hooks/useThemeColor';
-import { widthSizes, heightSizes } from '@/constants/Sizes'
+import React, { FC, useState } from 'react';
+import { View, StyleSheet, SafeAreaView, TextInput, TouchableOpacity } from 'react-native';
 
-const CallsScreen: React.FC = () => {
+import HeaderCalls from '@/components/HeaderCalls';
+import TextApp from '@/components/TextApp';
+
+import { useThemeColor } from '@/hooks/useThemeColor';
+import { widthSizes, heightSizes } from '@/constants/Sizes';
+
+const CallsScreen: FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [favorites, setFavorites] = useState<string[]>([]);
 
@@ -12,7 +15,7 @@ const CallsScreen: React.FC = () => {
   const backgroundColorSearch = useThemeColor({}, 'background');
   const buttonBackgroundColor = useThemeColor({}, 'buttonBackgroundTabs');
   const textColor = useThemeColor({}, 'text');
-  const borderColor = useThemeColor({}, 'borderColor')
+  const borderColor = useThemeColor({}, 'borderColor');
 
   const handleAddFavorite = () => {
     if (searchQuery.trim()) {
@@ -24,24 +27,24 @@ const CallsScreen: React.FC = () => {
   return (
     <SafeAreaView style={[styles.container, { backgroundColor }]}>
       <HeaderCalls />
-      <Text style={[styles.title, { color: textColor }]}>Calls</Text>
+      <TextApp style={[styles.title, { color: textColor }]} text={'Calls'} fontWeight={'bold'} />
       <TextInput
-        style={[styles.searchInput, { backgroundColor: buttonBackgroundColor, borderColor: borderColor}]}
+        style={[styles.searchInput, { backgroundColor: buttonBackgroundColor, borderColor: borderColor }]}
         placeholder="Search"
         value={searchQuery}
         onChangeText={setSearchQuery}
       />
       <View style={styles.favoritesContainer}>
-        <Text style={[styles.favoritesTitle, { color: textColor }]}>Favorites</Text>
+        <TextApp style={[styles.favoritesTitle, { color: textColor }]} text={'Favorites'} fontWeight={'bold'} />
       </View>
       <TouchableOpacity
         style={[styles.addButton, { backgroundColor: backgroundColorSearch }]}
         onPress={handleAddFavorite}
       >
-        <Text style={[styles.addButtonText, { color: textColor }]}>Add favorite</Text>
+        <TextApp style={[styles.addButtonText, { color: textColor }]} text={'Add favorite'} />
       </TouchableOpacity>
       <View style={styles.content}>
-        <Text>llamaditas</Text>
+        <TextApp text={'llamaditas'} />
       </View>
     </SafeAreaView>
   );
@@ -52,7 +55,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontWeight: 'bold',
     margin: widthSizes[10],
     fontSize: heightSizes[25],
   },
@@ -75,15 +77,14 @@ const styles = StyleSheet.create({
   },
   addButtonText: {
     textAlign: 'left',
-    fontSize: heightSizes[15], 
+    fontSize: heightSizes[15],
   },
   favoritesContainer: {
     marginTop: heightSizes[20],
     paddingHorizontal: widthSizes[10],
   },
   favoritesTitle: {
-    fontWeight: 'bold',
-    fontSize: heightSizes[18], 
+    fontSize: heightSizes[18],
     marginBottom: heightSizes[10],
   },
 });

@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, TextInput, Button } from 'react-native';
-import { useLocalSearchParams } from 'expo-router'; 
-import { auth } from '@/firebase.Config'; 
-import { sendMessage, getMessages } from '@/firebase/fbmessages'; 
-import { onAuthStateChanged } from 'firebase/auth';
-import { Message } from '@/models/chats'; // Asegúrate de que la ruta sea correcta
+import React, { FC, useEffect, useState } from 'react';
+import { View, FlatList, StyleSheet, TextInput, Button } from 'react-native';
+import { useLocalSearchParams } from 'expo-router';
 
-const ChatScreen: React.FC = () => {
-  const { chatId } = useLocalSearchParams(); 
+import { auth } from '@/firebase.Config';
+import { onAuthStateChanged } from 'firebase/auth';
+import { sendMessage, getMessages } from '@/firebase/fbmessages';
+
+import TextApp from '@/components/TextApp';
+
+import { Message } from '@/models/chats';
+import { widthSizes } from '@/constants/Sizes';
+
+const ChatScreen: FC = () => {
+  const { chatId } = useLocalSearchParams();
   const [messages, setMessages] = useState<Message[]>([]); // Usando la interfaz Message
   const [newMessage, setNewMessage] = useState('');
-  const [userId, setUserId] = useState<string | null>(null); 
-  const [loading, setLoading] = useState<boolean>(true); 
+  const [userId, setUserId] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
@@ -29,13 +34,13 @@ const ChatScreen: React.FC = () => {
     const fetchMessages = async () => {
       if (userId) {
         try {
-          setLoading(true); 
+          setLoading(true);
           const chatMessages = await getMessages(userId, chatId as string);
-          setMessages(chatMessages); 
+          setMessages(chatMessages);
         } catch (error) {
           console.error('Error al obtener mensajes:', error);
         } finally {
-          setLoading(false); 
+          setLoading(false);
         }
       }
     };
@@ -52,15 +57,16 @@ const ChatScreen: React.FC = () => {
 
   const renderMessage = ({ item }: { item: Message }) => (
     <View style={styles.message}>
-      <Text>{item.message}</Text>
-      <Text>{new Date(item.createdAt).toLocaleTimeString()}</Text> {/* Convertir el timestamp a una fecha legible */}
+      <TextApp text={item.message} />
+      <TextApp text={new Date(item.createdAt).toLocaleTimeString()} />{' '}
+      {/* Convertir el timestamp a una fecha legible */}
     </View>
   );
 
   return (
     <View style={styles.container}>
       {loading ? (
-        <Text>Cargando mensajes...</Text> 
+        <TextApp text={'Cargando mensajes...'} />
       ) : (
         <FlatList
           data={messages}
@@ -85,15 +91,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   message: {
-    padding: 10,
+    padding: widthSizes[10],
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
   input: {
     borderColor: '#ccc',
     borderWidth: 1,
-    padding: 10,
-    margin: 10,
+    padding: widthSizes[10],
+    margin: widthSizes[10],
   },
 });
 
