@@ -1,5 +1,5 @@
 import React, { useState, useEffect, FC } from 'react';
-import { View, FlatList, StyleSheet, TouchableOpacity, SafeAreaView, TextInput } from 'react-native';
+import { View, FlatList, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 

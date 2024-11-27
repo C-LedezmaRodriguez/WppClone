@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { View, TouchableOpacity, StyleSheet, ScrollView, TextInput, Image } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, ScrollView, Image } from 'react-native';
 import { Ionicons, MaterialIcons, Entypo, FontAwesome6 } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 

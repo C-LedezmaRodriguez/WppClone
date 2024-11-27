@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { View, FlatList, StyleSheet, TextInput, Button } from 'react-native';
+import { View, FlatList, StyleSheet, Button } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 
 import { auth } from '@/firebase.Config';
@@ -7,6 +7,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { sendMessage, getMessages } from '@/firebase/fbmessages';
 
 import TextApp from '@/components/TextApp';
+import TextInputApp from "@/components/TextInputApp";
 
 import { Message } from '@/models/chats';
 import { widthSizes } from '@/constants/Sizes';
@@ -75,7 +76,7 @@ const ChatScreen: FC = () => {
           inverted // Invierte la lista para mostrar el último mensaje en la parte inferior
         />
       )}
-      <TextInput
+      <TextInputApp
         value={newMessage}
         onChangeText={setNewMessage}
         placeholder="Escribe un mensaje..."

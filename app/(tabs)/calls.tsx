@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { View, StyleSheet, SafeAreaView, TextInput, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 
 import HeaderCalls from '@/components/HeaderCalls';
 import TextApp from '@/components/TextApp';

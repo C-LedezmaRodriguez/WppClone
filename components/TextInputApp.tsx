@@ -3,13 +3,14 @@ import { fontSizes, widthSizes } from '@/constants/Sizes';
 
 interface Props extends TextInputProps {
   fontWeight?: 'normal' | 'bold' | '600';
+  style?: any;
 }
 
 const TextInputApp = ({ fontWeight = 'normal', style = {}, ...props }: Props) => {
   return (
-    <TextInput 
-      style={[styles.input, { fontWeight }, style]} 
-      {...props} 
+    <TextInput
+      style={[styles.input, { fontWeight }, style]}
+      {...props}
     />
   );
 };
