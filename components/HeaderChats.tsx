@@ -1,11 +1,12 @@
 import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { useThemeColor } from '@/hooks/useThemeColor';
+import {fontSizes, heightSizes, widthSizes} from "@/constants/Sizes";
 
 const HeaderChats: React.FC = () => {
 const backgroundColor = useThemeColor({}, 'background');
 const buttonBackgroundColor = useThemeColor({},'buttonBackgroundTabs');
-const buttonActiveOn = useThemeColor({}, 'buttonActiveOn'); 
+const buttonPlusColor = useThemeColor({}, 'buttonActiveOn'); 
 const textColor = useThemeColor({}, 'text');
 
   return (
@@ -13,7 +14,7 @@ const textColor = useThemeColor({}, 'text');
       <View style={[styles.principalContainer, {backgroundColor}]}>
         <View style={styles.firstContainer}>
           <TouchableOpacity style={[styles.iconContainer1, {backgroundColor: buttonBackgroundColor}]}>
-            <Ionicons name="ellipsis-horizontal" size={20} color={textColor} />
+            <Ionicons name="ellipsis-horizontal" size={widthSizes[20]} color={textColor} />
           </TouchableOpacity>
         </View>
         <View style={styles.secondContainer}>
@@ -24,10 +25,10 @@ const textColor = useThemeColor({}, 'text');
             />
           </TouchableOpacity>
           <TouchableOpacity style={[styles.iconContainer, {backgroundColor: buttonBackgroundColor}]}>
-            <Ionicons name="camera-outline" size={20} color={textColor} />
+            <Ionicons name="camera-outline" size={widthSizes[20]} color={textColor} />
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.iconContainer, {backgroundColor:buttonActiveOn}]}>
-            <AntDesign name="plus" size={20} color={backgroundColor}/>
+          <TouchableOpacity style={[styles.iconContainer, {backgroundColor:buttonPlusColor}]}>
+            <AntDesign name="plus" size={widthSizes[20]} color={backgroundColor}/>
           </TouchableOpacity>
         </View>
       </View>
@@ -40,32 +41,32 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between', 
-    paddingVertical: 10,
+    paddingVertical: widthSizes[10],
   },
   firstContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start', 
     flex: 1, 
-    paddingHorizontal:10,
+    paddingHorizontal: widthSizes[10],
   },
   secondContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     flex: 1, 
-    paddingRight: 16,
-    paddingHorizontal: 150,
+    paddingRight: widthSizes[16],
+    paddingHorizontal: widthSizes[150],
   },
   iconContainer1: {
-    padding: 5,
+    padding: widthSizes[5],
     borderRadius: 50,
   },
   iconContainer: {
-    padding: 5,
+    padding: widthSizes[5],
     borderRadius: 50,
   },
   metaIcon: {
-    width: 20,
-    height: 20,
+    width: widthSizes[20],
+    height: heightSizes[20]
   },
 });
 

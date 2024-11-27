@@ -13,6 +13,5 @@ export default function RouteLayout() {
 const styles = StyleSheet.create({
   index:{
   flex: 1,
-   backgroundColor: 'green'
   },
 })

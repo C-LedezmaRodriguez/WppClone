@@ -41,13 +41,13 @@ export const Colors = {
     buttonOnCalls: '#3C3C3C',
     btnBackgroundFilterChat: '#4C6351',
     buttonFilterTextChat: '#8FBC8F',
-    searchInput: '#2A2A2A',
+    searchInput: '#333333',
     textSearch: '#CCCCCC',
     buttonActiveOn: '#228b22',
     backgroundColorTab: 'rgba(10 , 15, 10, 0.8)',
     tabBarActiveTintColor: '#ffffff',
     tabBarInactiveTintColor: '#6C7177',
-    borderColor:'transparent',
+        borderColor:'transparent',
   },
 };
 

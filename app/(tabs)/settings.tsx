@@ -4,6 +4,7 @@ import { Ionicons, MaterialIcons, Entypo, FontAwesome6 } from '@expo/vector-icon
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import TextApp from '@/components/TextApp';
+import TextInputApp from '@/components/TextInputApp';
 
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { widthSizes, heightSizes, fontSizes } from '@/constants/Sizes';
@@ -55,11 +56,12 @@ const SettingsScreen: FC = () => {
   const [searchText, setSearchText] = useState('');
 
   const backgroundColor = useThemeColor({}, 'backgroundCalls');
+  const searchInputColor = useThemeColor({}, 'searchInput');
   const backgroundColorSection = useThemeColor({}, 'background');
   const textColor = useThemeColor({}, 'text');
   const textStatus = useThemeColor({}, 'textBackgroundTabs');
-  const buttonBackgroundColor = useThemeColor({}, 'buttonBackgroundTabs');
   const borderColor = useThemeColor({}, 'borderColor');
+  const iconColor = useThemeColor({}, 'icon');
 
   const renderIcon = (option: SettingsOption) => {
     switch (option.iconLibrary) {
@@ -68,7 +70,7 @@ const SettingsScreen: FC = () => {
           <Ionicons
             name={option.icon as keyof typeof Ionicons.glyphMap}
             size={widthSizes[20]}
-            color="#075E54"
+            color={iconColor}
             style={styles.icon}
           />
         );
@@ -77,7 +79,7 @@ const SettingsScreen: FC = () => {
           <MaterialIcons
             name={option.icon as keyof typeof MaterialIcons.glyphMap}
             size={widthSizes[20]}
-            color="#075E54"
+            color={iconColor}
             style={styles.icon}
           />
         );
@@ -90,7 +92,7 @@ const SettingsScreen: FC = () => {
           <FontAwesome6
             name={option.icon as keyof typeof FontAwesome6.glyphMap}
             size={widthSizes[20]}
-            color="#075E54"
+            color={iconColor}
             style={styles.icon}
           />
         );
@@ -100,11 +102,11 @@ const SettingsScreen: FC = () => {
   };
 
   return (
-    <SafeAreaView style={[{ flex: 1 }, { backgroundColor }]}>
+    <SafeAreaView style={[{ flex: 1 }, { backgroundColor:'green' }]}>
       <ScrollView style={[{ flex: 1 }, { backgroundColor }]}>
         <TextApp text={'Settings'} style={[styles.title, { color: textColor }]} fontWeight={'bold'} />
-        <TextInput
-          style={[styles.searchInput, { backgroundColor: buttonBackgroundColor, borderColor: borderColor }]}
+        <TextInputApp
+          style={[styles.searchInput, { backgroundColor: searchInputColor, borderColor: borderColor }]}
           placeholder="Search"
           value={searchText}
           onChangeText={setSearchText}
@@ -132,7 +134,7 @@ const SettingsScreen: FC = () => {
             </TouchableOpacity>
           ))}
         </View>
-        <View style={styles.section}>
+        <View style={[styles.section, { backgroundColor: backgroundColorSection }]}>
           {thirdOptions.map((option) => (
             <TouchableOpacity key={option.id} style={styles.option}>
               {renderIcon(option)}
@@ -140,7 +142,7 @@ const SettingsScreen: FC = () => {
             </TouchableOpacity>
           ))}
         </View>
-        <View style={styles.section}>
+        <View style={[styles.section, { backgroundColor: backgroundColorSection }]}>
           <TextApp text={'Also from Meta'} style={styles.sectionTitle} />
           {otherOptions.map((option) => (
             <TouchableOpacity key={option.id} style={styles.option}>
@@ -157,18 +159,18 @@ const SettingsScreen: FC = () => {
 const styles = StyleSheet.create({
   title: {
     marginHorizontal: widthSizes[10],
+    marginTop:widthSizes[10],
     fontSize: fontSizes[25],
   },
   userSection: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: widthSizes[16],
-    marginBottom: heightSizes[20],
   },
   profileImage: {
     width: widthSizes[50],
     height: widthSizes[50],
-    borderRadius: widthSizes[25],
+    borderRadius: 25,
     marginRight: widthSizes[16],
   },
   userName: {
@@ -178,17 +180,15 @@ const styles = StyleSheet.create({
     fontSize: fontSizes[14],
   },
   searchInput: {
-    padding: widthSizes[10],
-    margin: widthSizes[16],
-    borderRadius: widthSizes[10],
-    borderWidth: 1,
+    padding: widthSizes[8],
+    margin: widthSizes[10],
+    borderWidth: heightSizes[1],
   },
   section: {
-    marginBottom: heightSizes[30],
+    marginTop: heightSizes[20],
   },
   sectionTitle: {
     fontSize: fontSizes[14],
-    color: 'grey',
     paddingVertical: heightSizes[10],
     paddingHorizontal: widthSizes[16],
   },

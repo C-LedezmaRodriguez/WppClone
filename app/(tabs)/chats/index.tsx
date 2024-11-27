@@ -4,6 +4,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 
 import TextApp from '@/components/TextApp';
+import TextInputApp from '@/components/TextInputApp';
 import Header from '@/components/HeaderChats';
 
 import useChats from '@/hooks/useChats';
@@ -68,11 +69,11 @@ const ChatsScreen: FC = () => {
   );
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor }]}>
+    <SafeAreaView style={[{flex:1}, { backgroundColor }]}>
       <Header />
       <TextApp style={[styles.title, { color: textColor }]} text={'Chats'} fontWeight={'bold'} />
-      <TextInput
-        style={[styles.searchInput, { backgroundColor: searchInputColor, borderColor: borderColor }]}
+      <TextInputApp
+        style={[{ backgroundColor: searchInputColor, borderColor: borderColor }]}
         placeholder="Ask Meta AI or Search"
         value={searchQuery}
         onChangeText={setSearchQuery}
@@ -104,11 +105,9 @@ const ChatsScreen: FC = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   title: {
     margin: widthSizes[10],
+    fontSize: heightSizes[25],
   },
   chatContainer: {
     flexDirection: 'row',
@@ -119,13 +118,11 @@ const styles = StyleSheet.create({
   chatDetails: {
     flexDirection: 'column',
   },
-  lastMessage: {},
-  timestamp: {},
-  searchInput: {
-    margin: widthSizes[10],
-    padding: widthSizes[8],
-    borderWidth: heightSizes[1],
-    borderRadius: widthSizes[10],
+  lastMessage: {
+    fontSize: heightSizes[13],
+  },
+  timestamp: {
+    fontSize: heightSizes[10],
   },
   filterContainer: {
     flexDirection: 'row',

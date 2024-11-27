@@ -14,6 +14,7 @@ const scaleFont = (size: any) => size * PixelRatio.getFontScale();
 const widthSizes = {
   full: width,
   200: scaleWidth(200),
+  150: scaleWidth(150),
   120: scaleWidth(120),
   100: scaleWidth(100),
   90: scaleWidth(90),
@@ -23,6 +24,7 @@ const widthSizes = {
   35: scaleWidth(35),
   30: scaleWidth(30),
   25: scaleWidth(25),
+  24: scaleWidth(24),
   20: scaleWidth(20),
   15: scaleWidth(15),
   18: scaleWidth(18),
@@ -65,6 +67,7 @@ const heightSizes = {
   5: scaleHeight(5),
   1: scaleHeight(1),
   0.2: scaleHeight(0.2),
+  0: scaleHeight(0),
 };
 
 const fontSizes = {
