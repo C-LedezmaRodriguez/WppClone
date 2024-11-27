@@ -8,18 +8,18 @@ import SettingsScreen from './settings';
 import { StyleSheet } from 'react-native';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { heightSizes, widthSizes } from '@/constants/Sizes';
-import {i18n} from "@/i18n";
+import { i18n } from '@/i18n';
 
 const Tab = createBottomTabNavigator();
 
 const Layout = () => {
   const backgroundColor = useThemeColor({}, 'backgroundColorTab');
   const tabBarActiveColor = useThemeColor({}, 'tabBarActiveTintColor');
-  const tabBarInactiveColor=  useThemeColor({}, 'tabBarInactiveTintColor');
+  const tabBarInactiveColor = useThemeColor({}, 'tabBarInactiveTintColor');
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarStyle: [styles.tabBar, {backgroundColor}],
+        tabBarStyle: [styles.tabBar, { backgroundColor }],
         tabBarLabelStyle: styles.tabBarLabel,
         tabBarActiveTintColor: tabBarActiveColor,
         tabBarInactiveTintColor: tabBarInactiveColor,
